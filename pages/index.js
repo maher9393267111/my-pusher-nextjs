@@ -12,15 +12,20 @@ const [messageToSend, setMessageToSend] = useState("");
 const [onlineUsersCount, setOnlineUsersCount] = useState(0);
 const [onlineUsers, setOnlineUsers] = useState([]);
 const [usersRemoved, setUsersRemoved] = useState([]);
-
+const [myinfo,setMyinfo] = useState({});
 
 useEffect(() => {
 
   const pusher = new Pusher('eb009196e4ebb3bf2adc', {
     cluster: 'eu',
     forceTLS: true,
+
     authEndpoint: `api/pusher/auth`,
+    // this data well be sent to the authEndpoint and will be used to authenticate the user
+    auth: { params: { username:'maher9393', userLocation:'login' } },
   });
+
+
 
 
   // 1- subscribe to the presence channel
@@ -33,6 +38,16 @@ useEffect(() => {
   setOnlineUsersCount(members.count);
   console.log('membrs online',onlineUsersCount);
   console.log(members.count);
+
+  //  get online user auth data
+ 
+  // my online data in this channel
+  console.log('online users ✅✅ ',members?.me);
+  setMyinfo(members?.me);
+  console.log('my info📌📌📌',myinfo);
+
+  // all online users in this channel
+  console.log('online users ✅✅ ',members);
 });
 
 
@@ -50,6 +65,17 @@ useEffect(() => {
   });
 
 
+  return () => {
+    pusher.unsubscribe("presence-channel");
+   pusher.disconnect()
+  
+      console.log("pusher disconnected");
+     // console.log(` leaving channel ${myinfo?.info?.username}`);
+    //  toast.info(` ${myinfo?.info?.username} you left the site`);
+    
+   
+   
+  };
 
 } ,[])
 
@@ -62,6 +88,7 @@ const handleSubmit = async e => {
   });
   console.log('sent');
 };
+
 
 
 
