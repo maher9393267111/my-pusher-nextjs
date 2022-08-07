@@ -13,7 +13,7 @@ const [onlineUsersCount, setOnlineUsersCount] = useState(0);
 const [onlineUsers, setOnlineUsers] = useState([]);
 const [usersRemoved, setUsersRemoved] = useState([]);
 const [myinfo,setMyinfo] = useState({});
-const [allmembers,setAllmembers] = useState([]);
+const [allmembers,setAllmembers] = useState({});
 
 useEffect(() => {
 
@@ -40,7 +40,7 @@ useEffect(() => {
   //console.log('membrs online',onlineUsersCount);
   //console.log(members.count);
 
-  setAllmembers(prevState => [...prevState, members.members]);
+  setAllmembers( members.members);
   console.log('all members',allmembers , '?????',members?.members);
   //  get online user auth data
  
@@ -131,14 +131,15 @@ onClick={handlemessage}
 
 online users count---- {onlineUsersCount}
 
-allmembers---- {allmembers?.length}
-{allmembers && allmembers?.length >0 && allmembers?.map((member2,index) => (
-  <div>
-    <p>{member2?.username}</p>
+{Object.keys(allmembers).map((key,index) => (
+  <div key={index}>
+    <p>{allmembers[key]?.username}</p>
   </div>
-)
-)}
+))}
 
+
+
+  
     </div>
   )
 }
