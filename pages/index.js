@@ -13,6 +13,7 @@ const [onlineUsersCount, setOnlineUsersCount] = useState(0);
 const [onlineUsers, setOnlineUsers] = useState([]);
 const [usersRemoved, setUsersRemoved] = useState([]);
 const [myinfo,setMyinfo] = useState({});
+const [allmembers,setAllmembers] = useState([]);
 
 useEffect(() => {
 
@@ -36,18 +37,21 @@ useEffect(() => {
  channel.bind("pusher:subscription_succeeded", members => {
   // total subscribed
   setOnlineUsersCount(members.count);
-  console.log('membrs online',onlineUsersCount);
-  console.log(members.count);
+  //console.log('membrs online',onlineUsersCount);
+  //console.log(members.count);
 
+  setAllmembers(prevState => [...prevState, members.members]);
+  console.log('all members',allmembers , '?????',members?.members);
   //  get online user auth data
  
   // my online data in this channel
-  console.log('online users ✅✅ ',members?.me);
+  //console.log('online users ✅✅ ',members?.me);
   setMyinfo(members?.me);
-  console.log('my info📌📌📌',myinfo);
+   toast.success(`welcome ${myinfo?.info?.username ? myinfo?.info?.username : 'user'}`);
+  //console.log('my info📌📌📌',myinfo);
 
   // all online users in this channel
-  console.log('online users ✅✅ ',members);
+  //console.log('online users ✅✅ ',members);
 });
 
 
@@ -84,14 +88,18 @@ const handleSubmit = async e => {
   e.preventDefault();
   await axios.post("/api/pusher/chat-update", {
     message: 'hello my name is maher ',
-    username:'maher',
+    username:`${myinfo?.info?.username}`,
   });
   console.log('sent');
 };
 
 
 
+const handlemessage = e => {
 
+  console.log('all members',allmembers);
+
+}
 
 
 
@@ -116,6 +124,20 @@ const handleSubmit = async e => {
 ))}
 
 
+<button
+type="submit"
+onClick={handlemessage}
+>all members handle</button>
+
+online users count---- {onlineUsersCount}
+
+allmembers---- {allmembers?.length}
+{allmembers && allmembers?.length >0 && allmembers?.map((member2,index) => (
+  <div>
+    <p>{member2?.username}</p>
+  </div>
+)
+)}
 
     </div>
   )
