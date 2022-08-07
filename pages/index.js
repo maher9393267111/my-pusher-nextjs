@@ -8,6 +8,11 @@ import {toast} from 'react-toastify'
 export default function Home() {
 
 const [chats,setChats] = useState([]);
+const [messageToSend, setMessageToSend] = useState("");
+const [onlineUsersCount, setOnlineUsersCount] = useState(0);
+const [onlineUsers, setOnlineUsers] = useState([]);
+const [usersRemoved, setUsersRemoved] = useState([]);
+
 
 useEffect(() => {
 
@@ -20,6 +25,17 @@ useEffect(() => {
 
   // 1- subscribe to the presence channel
   const channel = pusher.subscribe('presence-channel');
+
+
+ // when a new member successfully subscribes to the channel
+ channel.bind("pusher:subscription_succeeded", members => {
+  // total subscribed
+  setOnlineUsersCount(members.count);
+  console.log('membrs online',onlineUsersCount);
+  console.log(members.count);
+});
+
+
 
 
    // 2-  after user subscripe and send message  recive message from pusher channel 
@@ -67,10 +83,11 @@ const handleSubmit = async e => {
     </div>
 
 {chats?.map((chat,index) => (
-  <div>
+  <div key={index}>
     <p>{chat.message}</p>
   </div>
 ))}
+
 
 
     </div>
