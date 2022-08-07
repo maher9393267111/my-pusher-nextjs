@@ -28,14 +28,14 @@ useEffect(() => {
     const { username, message } = data;
     toast.info(`${username} : ${message} new message in site`);
    // setChats([...chats, data]);
-  //  setChats(prevState => [...prevState, { username, message }]);
+    setChats(prevState => [...prevState, { username, message }]);
    // console.log('chat-update 🟪🟪🟪', data);
     console.log('chats 🟪🟪🟪', chats);
   });
 
 
 
-} ,[chats])
+} ,[])
 
 
 const handleSubmit = async e => {
