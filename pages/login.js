@@ -38,18 +38,36 @@ const Login = () => {
         socket.on("your id", id => {
           console.log('your id',id);
         }, [])
+
+       // socket.emit('send message', 'hello abiiiii');
     
-        socket.on("message", (message) => {
-         console.log('message',message);
-        })
+       // receive message from server socket
+        // socket.on("message", (message) => {
+        //  console.log('message',message);
+        // })
       }, []);
 
 
+
+      // 
+      const sendmessage = () => {
+
+        // send message to server socket
+        socket.emit('send message', 'hello  majd bey');
+        socket.on("message", (message) => {
+            console.log('message',message);
+           })
+
+      }
 
 
     return (
         <div>
             <h1>Login</h1>
+
+            <div>
+                <button onClick={sendmessage}>send message</button>
+            </div>
         </div>
     );
 }
