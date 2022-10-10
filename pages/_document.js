@@ -1,20 +1,14 @@
-import '../styles/globals.css'
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import Head from "next/head";
+/* eslint-disable @next/next/no-sync-scripts */
+// pages/_document.js
 import Script from 'next/script';
-import Link from 'next/link';
-function MyApp({ Component, pageProps }) {
+import { Html, Head, Main, NextScript } from 'next/document';
+
+export default function Document() {
   return (
-    <>  
-
-{/* <>
-    <Head>
-      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      <meta charSet="UTF-8" />
-     
-
-      <link rel="stylesheet" href="/assets/css/vendor/font-awesome.min.css"/>
+    <Html>
+      <Head>
+      
+    <link rel="stylesheet" href="/assets/css/vendor/font-awesome.min.css"/>
     <link rel="stylesheet" href="/assets/css/vendor/plaza-icon.css"/>
     <link rel="stylesheet" href="/assets/css/vendor/jquery-ui.min.css"/>
 
@@ -48,26 +42,14 @@ function MyApp({ Component, pageProps }) {
     <Script src={"/assets/js/vendor/bootstrap.bundle.min.js"}/>
    
 
-  
-    
-   
-   
-  
 
 
-
-
-      <title>Mini Social Media</title>
-    </Head>
-  </> */}
-
-
-    <ToastContainer position="top-center" />
-
-    <Component {...pageProps} />
-    </>
-  )
-
+      
+      </Head>
+      <body>
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  );
 }
-
-export default MyApp
