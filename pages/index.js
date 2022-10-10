@@ -6,14 +6,19 @@ const HomeScreen = () => {
 
      <h1>asas</h1>
 
-     <ul>
-                                            <li><a href="wishlist.html"><i class="icon-heart"></i></a></li>
-                                            <li><a href="compare.html"><i class="icon-repeat"></i></a></li>
-                                            <li><a href="#" data-bs-toggle="modal" data-bs-target="#modalQuickview"><i class="icon-eye"></i></a></li>
-                                            <li><a href="#" data-bs-toggle="modal" data-bs-target="#modalAddcart"><i class="icon-shopping-cart"></i></a></li>
-                                        </ul>
-
+     <div class="col-6">
+                        
+                        <div class="header-search">
+                            <form action="#" method="post">
+                                <div class="header-search-box default-search-style d-flex">
+                                    <input class="default-search-style-input-box border-around border-right-none" type="search" placeholder="Search entire store here ..." required />
+                                    <button class="default-search-style-input-btn" type="submit"><i class="icon-search"></i></button>
+                                </div>
+                            </form>
+                        </div> 
       
+    </div>
+
     </div>
   );
 }
